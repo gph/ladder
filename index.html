@@ -2,81 +2,52 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <script>
-const url = 'https://www.pathofexile.com/api/ladders?realm=sony&offset=0&limit=100&id=SSF+Heist+HC&type=league';
+const url = 'https://www.pathofexile.com/api/ladders?realm=sony&offset=0&limit=50&id=SSF+Heist+HC&type=league';
 $.getJSON(url, function(ladder){
 	//console.log(ladder.entries);
+	var i = 0;
 	jQuery.each(ladder.entries, function(){
 		var table = document.getElementsByClassName('entries')[0];
-		var tr = document.createElement('tr');
 		
-		jQuery.each(this, function(key, val){
-
-			var rank;
-			var account;
-			var character;
-			var classe;
-			if(key == 'rank')
-			{
-				rank = document.createElement('td');
-				var text = document.createTextNode(val);
-				rank.appendChild(text);
-				rank.className = 'rank';
-				tr.appendChild(rank);
-			}
-			
-			if(key == 'account')
-			{
-				account = document.createElement('td');
-				var text = document.createTextNode(val.name);
-				account.appendChild(text);
-				account.className = 'account';
-				tr.appendChild(account);
-			}
-			
-			if(key == 'character')
-			{
-			console.log(val);
-				character = document.createElement('td');
-				var text = document.createTextNode(val.name);
-				character.appendChild(text);
-				character.className = 'character';
-				tr.appendChild(character);
+		var row = table.insertRow(i++);
+		
+		row.style.color = this.dead ? 'gray' : 'black';
+		
+		var online = row.insertCell(0);
+		online.style.backgroundColor = this.online ? '#e6ffee' : '#ffe6e6';
+		
+		
+		var rank = row.insertCell(1);
+		rank.innerHTML = this.rank;
+		
+		var account = row.insertCell(2);
+		account.innerHTML = this.account.name;
 				
-				level = document.createElement('td');
-				var text = document.createTextNode(val.level);
-				level.appendChild(text);
-				level.className = 'level';
-				tr.appendChild(level);
-							
-				classe = document.createElement('td');
-				var text = document.createTextNode(val.class);
-				classe.appendChild(text);
-				classe.className = 'class';
-				tr.appendChild(classe);
+		var character = row.insertCell(3);
+		character.innerHTML = this.character.name;
 				
-				/*
-				experience = document.createElement('td');
-				var text = document.createTextNode(val.experience);
-				experience.appendChild(text);
-				experience.className = 'experience';
-				tr.appendChild(experience);
-				*/
-
-			}
-			table.appendChild(tr);			
-		});
+		var classe = row.insertCell(4);
+		classe.innerHTML = this.character.class;
+				
+		var level = row.insertCell(5);
+		level.innerHTML = this.character.level;
+				
+		var exp = row.insertCell(6);
+		exp.innerHTML = this.character.experience;
 	});
 });
 </script>
 <table>
     <thead>
             <tr>
+				<th>Online</th>
                 <th>Rank</th>
+				<th>Account</th>
 				<th>Character</th>
-				<th>Level</th>
 				<th>Class</th>
-				<!--th class="sortable" data-sort="">Experience</th-->
-                <th>Account</th>
+                <th>Level</th>
+				<th>Experience</th>
+				<th></th>
                 
             </tr>
     </thead> 
