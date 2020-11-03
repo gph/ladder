@@ -5,10 +5,7 @@
 const url = 'https://www.pathofexile.com/api/ladders?realm=sony&offset=0&limit=50&id=ssf+heist+hc&type=league';
 
 $.getJSON(url, function(ladder){
-	var pathname = window.location.pathname;
-	var league = pathname.split('/');
-	console.log(pathname[pathname.length-1]);
-	
+
 	var i = 0;
 	jQuery.each(ladder.entries, function(){
 		var table = document.getElementsByClassName('entries')[0];
