@@ -2,9 +2,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <script>
-const url = 'https://www.pathofexile.com/api/ladders?realm=sony&offset=0&limit=50&id=SSF+Heist+HC&type=league';
+const url = 'https://www.pathofexile.com/api/ladders?realm=sony&offset=0&limit=50&id=ssf+heist+hc&type=league';
+
 $.getJSON(url, function(ladder){
-	//console.log(ladder.entries);
+	var pathname = window.location.pathname;
+	var league = pathname.split('/');
+	console.log(pathname[pathname.length-1]);
+	
 	var i = 0;
 	jQuery.each(ladder.entries, function(){
 		var table = document.getElementsByClassName('entries')[0];
@@ -15,7 +19,6 @@ $.getJSON(url, function(ladder){
 		
 		var online = row.insertCell(0);
 		online.style.backgroundColor = this.online ? '#e6ffee' : '#ffe6e6';
-		
 		
 		var rank = row.insertCell(1);
 		rank.innerHTML = this.rank;
