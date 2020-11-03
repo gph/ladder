@@ -1,1 +1,1 @@
-# Path of Exile Playstation SSF Hardcore Heist Ladder
+# Path of Exile Console Ladder
